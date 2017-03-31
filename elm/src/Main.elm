@@ -1,9 +1,11 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
+import Random
 
 type alias Model =
   { itemList : List Item
+  , seed : Random.Seed
   }
 
 type alias Item =
@@ -14,12 +16,13 @@ type alias Item =
 initialModel : Model
 initialModel =
   { itemList = []
+  , seed = Random.initialSeed 0
   }
 
 firstItemList : List Item
 firstItemList =
   let
-    idList = List.range 1 1000
+    idList = List.range 1 10000
     idsToItems = (\id -> { id = id, name = "User #" ++ (toString id) })
   in
     List.map idsToItems idList
@@ -35,16 +38,29 @@ update msg model =
 
 refreshModel : Model -> Model
 refreshModel model =
-  { model
-  | itemList = refreshItems model.itemList
-  }
+  let
+    (newItemList, newSeed) = refreshItems model.seed model.itemList
+  in
+    { model
+    | itemList = newItemList
+    , seed = newSeed
+    }
 
-refreshItems : List Item -> List Item
-refreshItems list =
+refreshItems : Random.Seed -> List Item -> (List Item, Random.Seed)
+refreshItems seed list =
   if (List.length list) == 0 then
-    firstItemList
+    (firstItemList, seed)
   else
-    list
+    shakeItemList seed list
+
+shakeItemList : Random.Seed -> List Item -> (List Item, Random.Seed)
+shakeItemList seed list =
+  let
+    shouldShakeItem = Random.map (\n -> if n > 90 then True else False) (Random.int 0 99)
+    itemStep (shouldShake, seed) preList item = (List.append preList [(if shouldShake then { item | name = item.name ++ "0" } else item)], seed)
+    folder item (shakenList, seed) = itemStep (Random.step shouldShakeItem seed) shakenList item
+  in
+    List.foldl folder ([], seed) list
 
 view : Model -> Html Msg
 view model =
