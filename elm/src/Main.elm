@@ -3,7 +3,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
 type alias Model =
-  { items : List Item
+  { itemList : List Item
   }
 
 type alias Item =
@@ -13,8 +13,16 @@ type alias Item =
 
 initialModel : Model
 initialModel =
-  { items = []
+  { itemList = []
   }
+
+firstItemList : List Item
+firstItemList =
+  let
+    idList = List.range 1 1000
+    idsToItems = (\id -> { id = id, name = "User #" ++ (toString id) })
+  in
+    List.map idsToItems idList
 
 type Msg
   = Refresh
@@ -23,13 +31,28 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
     Refresh ->
-      ( model, Cmd.none )
+      ( refreshModel model, Cmd.none )
+
+refreshModel : Model -> Model
+refreshModel model =
+  { model
+  | itemList = refreshItems model.itemList
+  }
+
+refreshItems : List Item -> List Item
+refreshItems list =
+  if (List.length list) == 0 then
+    firstItemList
+  else
+    list
 
 view : Model -> Html Msg
 view model =
   div
     []
-    [ table
+    [ p []
+        [ button [ onClick Refresh ] [ text (if (List.length model.itemList) == 0 then "Populate" else "Refresh") ] ]
+    , table
         []
         [ thead
             []
@@ -38,10 +61,8 @@ view model =
             ]
         , tbody
             []
-            (List.map rowView model.items)
+            (List.map rowView model.itemList)
         ]
-    , p []
-        [ button [ onClick Refresh ] [ text "Send" ] ]
     ]
 
 rowView : Item -> Html Msg
