@@ -1,7 +1,9 @@
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+port module Main exposing (..)
 import Random
+import Json.Decode -- A bug in Elm forces us to explicitly require this
+
+port refresh : ( () -> msg ) -> Sub msg
+port render : List Item -> Cmd msg
 
 type alias Model =
   { itemList : List Item
@@ -34,7 +36,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
     Refresh ->
-      ( refreshModel model, Cmd.none )
+      let
+        newModel = refreshModel model
+      in
+        ( newModel, render newModel.itemList )
 
 refreshModel : Model -> Model
 refreshModel model =
@@ -62,43 +67,15 @@ shakeItemList seed list =
   in
     List.foldl folder ([], seed) list
 
-view : Model -> Html Msg
-view model =
-  div
-    []
-    [ p []
-        [ button [ onClick Refresh ] [ text (if (List.length model.itemList) == 0 then "Populate" else "Refresh") ] ]
-    , table
-        []
-        [ thead
-            []
-            [ th [] [ text "id" ]
-            , th [] [ text "name" ]
-            ]
-        , tbody
-            []
-            (List.map rowView model.itemList)
-        ]
-    ]
-
-rowView : Item -> Html Msg
-rowView item =
-  tr
-    []
-    [ td [] [ text (toString item.id) ]
-    , td [] [ text item.name ]
-    ]
-
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+  refresh (\_ -> Refresh)
 
 main : Program Never Model Msg
 main =
-  Html.program
+  Platform.program
     { init = (initialModel, Cmd.none)
     , update = update
-    , view = view
     , subscriptions = subscriptions
     }
 

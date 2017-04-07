@@ -3,10 +3,24 @@
     <title>Elm experiment</title>
   </head>
   <body>
+    <div id="app">
+      <p><button name="refresh">Populate</button></p>
+    </div>
+
     <script type="text/javascript" src="main.js"></script>
     <script>
-      var app = Elm.Main.fullscreen();
-      window.app = app;
+      var elmApp = Elm.Main.worker();
+      window.elmApp = elmApp;
+
+      elmApp.ports.render.subscribe(function(model) {
+        console.log("RENDER", model);
+      });
+
+      var app = document.getElementById('app');
+      var button = app.querySelector('[name="refresh"]');
+      button.addEventListener('click', function() {
+        elmApp.ports.refresh.send(null);
+      });
     </script>
   </body>
 </html>
