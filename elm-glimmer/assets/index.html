@@ -13,7 +13,14 @@
       window.elmApp = elmApp;
 
       elmApp.ports.render.subscribe(function(model) {
-        console.log("RENDER", model);
+        console.log("SENDING UPDATE ACTION", model);
+        var msg = {
+          origin: 'core',
+          target: 'view',
+          action: 'update',
+          payload: { model },
+        };
+        window.postMessage(msg, '*');
       });
 
       window.addEventListener('message', function(evt) {
