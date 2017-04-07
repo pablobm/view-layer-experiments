@@ -33,6 +33,6 @@ export default class ModelDisplay extends Component {
       target: 'core',
       action: 'refresh',
     }
-    window.postMessage(msg, '*');
+    window.postMessage(msg, window.location.origin);
   }
 };

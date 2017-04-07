@@ -20,7 +20,7 @@
           action: 'update',
           payload: { model },
         };
-        window.postMessage(msg, '*');
+        window.postMessage(msg, window.location.origin);
       });
 
       window.addEventListener('message', function(evt) {
