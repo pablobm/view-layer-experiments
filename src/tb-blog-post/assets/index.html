@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Elm experiment</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="elm.js"></script>
+    <script>
+      var elmApp = Elm.Main.worker();
+      window.elmApp = elmApp;
+
+      elmApp.ports.render.subscribe(function(model) {
+        console.log("RENDER", model);
+      });
+
+      function actionIncrement(value) {
+        elmApp.ports.increment.send(value);
+      };
+
+      function actionReset() {
+        elmApp.ports.reset.send(null);
+      };
+      actionReset();
+    </script>
+  </body>
+</html>

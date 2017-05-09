@@ -1,5 +1,7 @@
 port module Main exposing (main)
 
+import Json.Decode -- A bug in Elm forces us to explicitly require this
+
 type alias Model =
     Int
 

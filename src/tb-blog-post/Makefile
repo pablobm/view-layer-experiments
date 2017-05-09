@@ -7,3 +7,4 @@ build:
 	mkdir -p dist
 	rm -rf dist/*
 	elm-make elm/Main.elm --output dist/elm.js
+	cp -pr assets/* dist/
