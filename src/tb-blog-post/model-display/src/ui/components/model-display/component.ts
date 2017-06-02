@@ -4,11 +4,21 @@ export default class ModelDisplay extends Component {
   @tracked model = null;
 
   increment() {
-    console.log("Increment");
+    this.postIncrement(1);
   }
 
   decrement() {
-    console.log("Decrement");
+    this.postIncrement(-1);
+  }
+
+  postIncrement(amount) {
+    let msg = {
+      origin: 'view',
+      target: 'core',
+      action: 'increment',
+      payload: { amount },
+    }
+    window.postMessage(msg, window.location.origin);
   }
 
   didInsertElement() {

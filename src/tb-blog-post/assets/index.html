@@ -20,6 +20,22 @@
         window.postMessage(msg, window.location.origin);
       });
 
+      window.addEventListener('message', function(evt) {
+        if (evt.origin !== window.location.origin) {
+          return false;
+        }
+
+        var data = evt.data;
+        if (data.origin !== 'view' && data.target !== 'core') {
+          return false;
+        }
+
+        var action = data.action;
+        if (action === 'increment') {
+          actionIncrement(data.payload.amount);
+        }
+      });
+
       function actionIncrement(value) {
         elmApp.ports.increment.send(value);
       };
