@@ -11,7 +11,13 @@
       window.elmApp = elmApp;
 
       elmApp.ports.render.subscribe(function(model) {
-        console.log("RENDER", model);
+        var msg = {
+          origin: 'core',
+          target: 'view',
+          action: 'update',
+          payload: { model },
+        };
+        window.postMessage(msg, window.location.origin);
       });
 
       function actionIncrement(value) {
