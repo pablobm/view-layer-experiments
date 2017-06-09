@@ -11,6 +11,15 @@ export default class ModelDisplay extends Component {
     this.postIncrement(-1);
   }
 
+  reset() {
+    let msg = {
+      origin: 'view',
+      target: 'core',
+      action: 'reset',
+    }
+    window.postMessage(msg, window.location.origin);
+  }
+
   postIncrement(amount) {
     let msg = {
       origin: 'view',

@@ -33,6 +33,8 @@
         var action = data.action;
         if (action === 'increment') {
           actionIncrement(data.payload.amount);
+        } else if (action === 'reset') {
+          actionReset();
         }
       });
 
