@@ -1,16 +1,20 @@
-<p><button onclick={{action refresh}}>{{buttonText}}</button></p>
+<div>
+  <h1>Pure Glimmer</h1>
 
-<table>
-  <thead>
-    <th>id</th>
-    <th>name</th>
-  </thead>
-  <tbody>
-    {{#each itemList key="@index" as |item|}}
-      <tr>
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <p><button onclick={{action refresh}}>{{buttonText}}</button></p>
+
+  <table>
+    <thead>
+      <th>id</th>
+      <th>name</th>
+    </thead>
+    <tbody>
+      {{#each itemList key="@index" as |item|}}
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

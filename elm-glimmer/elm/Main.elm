@@ -25,7 +25,7 @@ firstItemList : List Item
 firstItemList =
   let
     idList = List.range 1 10000
-    idsToItems = (\id -> { id = id, name = "User #" ++ (toString id) })
+    idsToItems = (\id -> { id = id, name = "Item #" ++ (toString id) })
   in
     List.map idsToItems idList
 

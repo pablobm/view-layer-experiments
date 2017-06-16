@@ -23,7 +23,7 @@ firstItemList : List Item
 firstItemList =
   let
     idList = List.range 1 10000
-    idsToItems = (\id -> { id = id, name = "User #" ++ (toString id) })
+    idsToItems = (\id -> { id = id, name = "Item #" ++ (toString id) })
   in
     List.map idsToItems idList
 
@@ -66,7 +66,8 @@ view : Model -> Html Msg
 view model =
   div
     []
-    [ p []
+    [ h1 [] [ text "Pure Elm" ]
+    , p []
         [ button [ onClick Refresh ] [ text (if (List.length model.itemList) == 0 then "Populate" else "Refresh") ] ]
     , table
         []
