@@ -2,25 +2,45 @@
 <html>
 <head>
   <title>Elm vs. Elm+Glimmer</title>
+  <style>
+    .impl-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .impl {
+      flex-grow: 1;
+      padding: 0 .3em;
+    }
+    .impl__title {
+      text-align: center;
+      height: 2em;
+    }
+    .impl__display {
+      width: 100%;
+      height: 30em;
+    }
+  </style>
 </head>
 <body>
 
 <h1>Elm vs. Elm+Glimmer vs. Glimmer</h1>
 <p>These are three implementations of the same app, compared for performance.</p>
 
-<div>
-  <h2>Pure Elm implementation</h2>
-  <iframe src="elm"></iframe>
-</div>
+<div class="impl-list">
+  <div class="impl impl__elm">
+    <h2 class="impl__title">Pure Elm</h2>
+    <iframe class="impl__display" src="elm"></iframe>
+  </div>
 
-<div>
-  <h2>Elm core + Glimmer renderer</h2>
-  <iframe src="elm-glimmer"></iframe>
-</div>
+  <div class="impl impl__elm-glimmer">
+    <h2 class="impl__title">Elm core + Glimmer renderer</h2>
+    <iframe class="impl__display" src="elm-glimmer"></iframe>
+  </div>
 
-<div>
-  <h2>Pure Glimmer implementation</h2>
-  <iframe src="glimmer"></iframe>
+  <div class="impl impl__glimmer">
+    <h2 class="impl__title">Pure Glimmer</h2>
+    <iframe class="impl__display" src="glimmer"></iframe>
+  </div>
 </div>
 
 </body>
