@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Elm experiment</title>
+  </head>
+  <body>
+    <div>
+      <div id="app"></div>
+    </div>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="elm.js"></script>
+    <script>
+      var elmApp = Elm.Main.worker();
+      window.elmApp = elmApp;
+
+      elmApp.ports.render.subscribe(function(model) {
+        console.log("SENDING UPDATE ACTION", model);
+        var msg = {
+          origin: 'core',
+          target: 'view',
+          action: 'update',
+          payload: { model },
+        };
+        window.postMessage(msg, window.location.origin);
+      });
+
+      window.addEventListener('message', function(evt) {
+        if (evt.origin !== window.location.origin) {
+          return false;
+        }
+
+        var data = evt.data;
+        if (data.origin !== 'view' && data.target !== 'core') {
+          return false;
+        }
+
+        var action = data.action;
+        if (action === 'refresh') {
+          actionRefresh();
+        }
+      });
+
+      function actionRefresh () {
+        console.log("REFRESH");
+        elmApp.ports.refresh.send(null);
+      };
+    </script>
+  </body>
+</html>
