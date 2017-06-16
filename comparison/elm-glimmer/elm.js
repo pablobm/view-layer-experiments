@@ -6601,7 +6601,7 @@ var _user$project$Main$firstItemList = function () {
 			id: id,
 			name: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'User #',
+				'Item #',
 				_elm_lang$core$Basics$toString(id))
 		};
 	};

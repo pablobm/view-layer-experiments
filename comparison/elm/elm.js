@@ -9136,7 +9136,7 @@ var _user$project$Main$firstItemList = function () {
 			id: id,
 			name: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'User #',
+				'Item #',
 				_elm_lang$core$Basics$toString(id))
 		};
 	};
@@ -9186,70 +9186,81 @@ var _user$project$Main$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$p,
+				_elm_lang$html$Html$h1,
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Refresh),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(
-								_elm_lang$core$Native_Utils.eq(
-									_elm_lang$core$List$length(model.itemList),
-									0) ? 'Populate' : 'Refresh'),
-							_1: {ctor: '[]'}
-						}),
+					_0: _elm_lang$html$Html$text('Pure Elm'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$table,
+					_elm_lang$html$Html$p,
 					{ctor: '[]'},
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$thead,
-							{ctor: '[]'},
+							_elm_lang$html$Html$button,
 							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$th,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('id'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
+								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Refresh),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									_elm_lang$core$Native_Utils.eq(
+										_elm_lang$core$List$length(model.itemList),
+										0) ? 'Populate' : 'Refresh'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$table,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$thead,
+								{ctor: '[]'},
+								{
 									ctor: '::',
 									_0: A2(
 										_elm_lang$html$Html$th,
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('name'),
+											_0: _elm_lang$html$Html$text('id'),
 											_1: {ctor: '[]'}
 										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$tbody,
-								{ctor: '[]'},
-								A2(_elm_lang$core$List$map, _user$project$Main$rowView, model.itemList)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$th,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('name'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$tbody,
+									{ctor: '[]'},
+									A2(_elm_lang$core$List$map, _user$project$Main$rowView, model.itemList)),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
