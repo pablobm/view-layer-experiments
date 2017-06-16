@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Examples</title>
+  <title>Elm vs. Elm+Glimmer</title>
+  <style>
+    .impl-list {
+      display: flex;
+      flex-direction: row;
+    }
+    .impl {
+      flex-grow: 1;
+      padding: 0 .3em;
+    }
+    .impl__title {
+      text-align: center;
+      height: 2em;
+    }
+    .impl__display {
+      width: 100%;
+      height: 30em;
+    }
+  </style>
 </head>
 <body>
-<p>Examples will go here</p>
+
+<h1>Elm vs. Elm+Glimmer vs. Glimmer</h1>
+<p>One app, three implementations.</p>
+
+<div class="impl-list">
+  <div class="impl impl__elm">
+    <iframe class="impl__display" src="comparison/elm"></iframe>
+  </div>
+
+  <div class="impl impl__elm-glimmer">
+    <iframe class="impl__display" src="comparison/elm-glimmer"></iframe>
+  </div>
+
+  <div class="impl impl__glimmer">
+    <iframe class="impl__display" src="comparison/glimmer"></iframe>
+  </div>
+</div>
+
 </body>
 </html>
